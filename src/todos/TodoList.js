@@ -1,19 +1,27 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import "./TodoList.css";
 import NewTodoForm from "./NewTodoForm";
-import { getTodos, getTodosLoading } from "./selectors";
+import styled from "styled-components";
+import {
+  getTodosLoading,
+  getCompletedTodos,
+  getIncompleteTodos,
+} from "./selectors";
 import {
   loadtodos,
   markTodoAsCompletedRequest,
   removeTodoRequest,
 } from "./thunks";
 import TodoListItem from "./TodoListItem";
-import { isLoading } from "./reducers";
 
+const ListWrapper = styled.div`
+  max-width: 700px;
+  margin: auto;
+`;
 const TodoList = (
   {
-    todos = [{ text: "Hello" }],
+    completedTodos,
+    incompletedTodos,
     onRemovePressed,
     onCompletedPressed,
     isLoading,
@@ -25,16 +33,25 @@ const TodoList = (
   }, []);
   const loadingMessage = <div>Loading todos...</div>;
   const content = (
-    <div className="list-wrapper">
+    <ListWrapper>
       <NewTodoForm />
-      {todos.map((todo) => (
+      <h3>Incomplete:</h3>
+      {incompletedTodos.map((todo) => (
         <TodoListItem
           todo={todo}
           onRemovePressed={onRemovePressed}
           onCompletedPressed={onCompletedPressed}
         />
       ))}
-    </div>
+      <h3>Completed:</h3>
+      {completedTodos.map((todo) => (
+        <TodoListItem
+          todo={todo}
+          onRemovePressed={onRemovePressed}
+          onCompletedPressed={onCompletedPressed}
+        />
+      ))}
+    </ListWrapper>
   );
   return isLoading ? loadingMessage : content;
 };
@@ -42,7 +59,8 @@ const TodoList = (
 // object that represents the entire redux state
 const mapStateToProps = (state) => ({
   isLoading: getTodosLoading(state), // Using selectors to get the data from the state
-  todos: getTodos(state),
+  completedTodos: getCompletedTodos(state),
+  incompletedTodos: getIncompleteTodos(state),
 });
 
 //Take the state object and return another object with pieces of state that component needs access to

@@ -62,7 +62,7 @@ export const markTodoAsCompletedRequest = (id) => async (dispatch) => {
       { method: "POST" }
     );
 
-    const markedTodo = response.json();
+    const markedTodo = await response.json();
     dispatch(markTodoAsCompleted(markedTodo));
   } catch (error) {
     dispatch(displayAlert(error));
