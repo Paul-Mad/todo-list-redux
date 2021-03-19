@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import "./TodoList.css";
 import NewTodoForm from "./NewTodoForm";
+import { getTodos, getTodosLoading } from "./selectors";
 import {
   loadtodos,
   markTodoAsCompletedRequest,
@@ -40,8 +41,8 @@ const TodoList = (
 
 // object that represents the entire redux state
 const mapStateToProps = (state) => ({
-  isLoading: state.isLoading,
-  todos: state.todos,
+  isLoading: getTodosLoading(state), // Using selectors to get the data from the state
+  todos: getTodos(state),
 });
 
 //Take the state object and return another object with pieces of state that component needs access to

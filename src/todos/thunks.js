@@ -59,9 +59,7 @@ export const markTodoAsCompletedRequest = (id) => async (dispatch) => {
   try {
     const response = await fetch(
       `http://localhost:8080/todos/${id}/completed`,
-      {
-        method: "POST",
-      }
+      { method: "POST" }
     );
 
     const markedTodo = response.json();

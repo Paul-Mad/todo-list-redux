@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addTodoRequest } from "./thunks";
 import "./NewTodoForm.css";
+import { getTodos } from "./selectors";
 
 // connect ()(NewTodoForm)  HOF
 
@@ -38,7 +39,7 @@ const NewTodoForm = ({ todos, onCreatePressed }) => {
 
 // object that represents the entire redux state
 const mapStateToProps = (state) => ({
-  todos: state.todos,
+  todos: getTodos(state), //using selectors to get the start data
 });
 
 //Take the state object and return another object with pieces of state that component needs access to
