@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/register": "^7.13.8",
     "@babel/runtime": "^7.13.10",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
+    "chai": "^4.3.4",
+    "mocha": "^8.3.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.2",
@@ -22,7 +25,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "mocha \"src/**/*.test.js\" --require @babel/register --recursive",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -44,6 +47,9 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-transform-runtime": "^7.13.10"
+    "@babel/plugin-transform-runtime": "^7.13.10",
+    "fetch-mock": "^9.11.0",
+    "node-fetch": "^2.6.1",
+    "sinon": "^9.2.4"
   }
 }
